@@ -1,8 +1,12 @@
+import { FC } from "react";
 import { ButtonTest } from "./buton.styles"
 
-const Button = () => {
+interface PropsButton {
+  onClick: () => void;
+}
+const Button:FC<PropsButton> = ({onClick}) => {
   return (
-    <ButtonTest>Button</ButtonTest>
+    <ButtonTest onClick={onClick}>Button</ButtonTest>
   )
 }
 

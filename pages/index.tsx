@@ -12,9 +12,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Button />
+        <Button onClick={() => console.log('hello')} />
       </main>
-
     </div>
   )
 }
