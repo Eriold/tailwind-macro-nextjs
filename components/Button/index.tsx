@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ButtonTest } from "./buton.styles"
+import ButtonTest from "./buton.styles"
 
 interface PropsButton {
   onClick: () => void;
