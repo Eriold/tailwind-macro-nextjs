@@ -22,13 +22,13 @@ const FromToPage: NextPage = () => {
   useEffect(() => {
     setEnableButton(sendFrom.length > 0 && sendTo.length > 0)
   }, [sendTo, sendFrom])
-  
+
   return (
     <MainLayout>
       <Card>
         <Row justify="center" gutter={[16, 16]}>
           <Col span={24}>
-            <Title text="De quién y quién recibe" />
+            <Title text="De quién envía y quién recibe" />
           </Col>
           <Col span={10}>
             <Image src={fromTo} alt="test" sizes="100%" />

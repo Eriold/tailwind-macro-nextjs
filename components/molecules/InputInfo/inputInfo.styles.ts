@@ -17,12 +17,4 @@ export const Span = styled.span`
     pt-2
     -mb-1
   `}
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  ::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
 `
