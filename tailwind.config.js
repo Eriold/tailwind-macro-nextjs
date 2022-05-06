@@ -7,6 +7,16 @@ module.exports = {
       xl: '1439px', // X-large
       max: '1919px' // Max
     },
+    fontFamily: {
+      sans: "'Nunito', 'sans-serif'"
+    },
+    fontWeight: {
+      regular: 'normal',
+      semibold: '600',
+      bold: '700',
+      extrabold: '800',
+      black: '900'
+    },
     extend: {
       colors: {},
     },
