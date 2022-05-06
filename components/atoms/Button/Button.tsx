@@ -7,7 +7,7 @@ import { Colors } from '../../../types/colors';
 import { Content, Wrapper } from './button.styles';
 
 // Props
-type ButtonProps = {
+interface ButtonProps {
   color?: Colors;
   disabled?: boolean;
   fullWidth?: boolean;

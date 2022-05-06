@@ -9,8 +9,8 @@ export default {
     children: { control: 'text' },
     color: { control: 'select' },
     disabled: { control: 'boolean' },
-    fullWidth: { control: 'boolean' }
-  }
+    fullWidth: { control: 'boolean' },
+  },
 } as ComponentMeta<typeof DefaultComponent>
 
 const Template: ComponentStory<typeof DefaultComponent> = args => (
@@ -22,5 +22,5 @@ Button.args = {
   children: 'Button',
   color: 'primary',
   disabled: false,
-  fullWidth: false
+  fullWidth: false,
 }

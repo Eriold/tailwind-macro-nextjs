@@ -7,8 +7,8 @@ export const Wrapper = styled.button<{
   fullWidth?: boolean;
 }>`
   ${tw`
-      font-family['Nunito']
-      rounded-2xl
+      font-sans
+      rounded-lg
       py-2
       px-5
       font-bold
@@ -17,6 +17,8 @@ export const Wrapper = styled.button<{
       flex
       justify-center
       items-center
+      sm:w-full
+      md:w-auto
     `}
   ${({ color }) => {
     if (color === Colors.primary) {
@@ -28,7 +30,7 @@ export const Wrapper = styled.button<{
     }
   }}
 
-${({ fullWidth }) => fullWidth && tw`w-full`}
+${({ fullWidth }) => fullWidth && tw`sm:w-full`}
 
   &:disabled {
     ${tw`
