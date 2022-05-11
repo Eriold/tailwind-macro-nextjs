@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import Image from 'next/image'
 import { welcome } from '../assets/svg'
 import { Button, Title } from '../components/atoms'
@@ -18,7 +19,9 @@ const Home: NextPage = () => {
           </Col>
           <Col span={24}>
             <Row justify="center">
+              <Link href='/send/from-to'>
               <Button>Continuar</Button>
+              </Link>
             </Row>
           </Col>
         </Row>
