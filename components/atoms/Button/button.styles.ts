@@ -35,7 +35,7 @@ ${({ fullWidth }) => fullWidth && tw`sm:w-full`}
   &:disabled {
     ${tw`
       bg-gray-400
-      text-gray-500
+      text-gray-50
     `}
   }
 `;
