@@ -1,0 +1,1 @@
+export {default as PostDataService } from './skydropxApi/postApi'
