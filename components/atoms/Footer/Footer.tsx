@@ -9,7 +9,7 @@ const FooterUI = () => {
         backgroundColor: '#1e293b',
         color: 'white',
         bottom: '0px',
-        position: 'absolute',
+        position: 'fixed',
         width: '100%'
       }}
     >

@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { parcel } from '../../assets/svg'
-import { Button, Title } from '../../components/atoms'
+import { Button, Title, CardShadow } from '../../components/atoms'
 import { MainLayout } from '../../layouts/MainLayout'
-import { Row, Col, Card } from 'antd'
+import { Row, Col } from 'antd'
 import { InputInfo } from '../../components/molecules'
 import { useState, useEffect } from 'react'
 
@@ -38,7 +38,7 @@ const ParcelsPage: NextPage = () => {
 
   return (
     <MainLayout>
-      <Card>
+      <CardShadow>
         <Row justify="center" gutter={[16, 16]}>
           <Col span={24}>
             <Title text="Información detallada del paquete" />
@@ -93,7 +93,7 @@ const ParcelsPage: NextPage = () => {
             </Row>
           </Col>
         </Row>
-      </Card>
+      </CardShadow>
     </MainLayout>
   )
 }
