@@ -425,8 +425,6 @@ const PricingList: NextPage = children => {
       key: item.id,
       rating: ratingStarts(item.attributes.ranking),
     }))
-
-  console.log(dataMassage)
   return (
     <MainLayout>
       <CardShadow>
@@ -435,7 +433,7 @@ const PricingList: NextPage = children => {
           <Table
             columns={columns}
             dataSource={dataMassage}
-            key="pricingTable"
+            key="key"
             onRow={record => ({
               onClick: () => {
                 console.log(record.key)

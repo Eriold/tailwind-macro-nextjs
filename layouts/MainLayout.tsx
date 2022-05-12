@@ -30,7 +30,7 @@ export const MainLayout: FC<LayoutProps> = ({ children, title }) => {
         />
       </Head>
       <Layout>
-        <Content style={{ paddingTop: '20px', backgroundColor: 'white' }}>
+        <Content style={{ padding: '20px 0px 75px 0px', backgroundColor: 'white' }}>
           <Row justify="center">
             <Col xs={24} sm={20} md={18} lg={16} xl={14} xxl={12}>
               {children}
