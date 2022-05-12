@@ -2,14 +2,14 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { welcome } from '../assets/svg'
-import { Button, Title } from '../components/atoms'
+import { Button, Title, CardShadow } from '../components/atoms'
 import { MainLayout } from '../layouts/MainLayout'
-import { Row, Col, Card } from 'antd'
+import { Row, Col } from 'antd'
 
 const Home: NextPage = () => {
   return (
     <MainLayout>
-      <Card>
+      <CardShadow>
         <Row justify="center" gutter={[16, 16]}>
           <Col span={24}>
             <Title text="Bienvenido" />
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
             </Row>
           </Col>
         </Row>
-      </Card>
+      </CardShadow>
     </MainLayout>
   )
 }
