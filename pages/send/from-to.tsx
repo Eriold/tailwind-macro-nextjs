@@ -1,13 +1,17 @@
+import { useState, useEffect } from 'react'
 import type { NextPage } from 'next'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { fromTo } from '../../assets/svg'
 import { Button, Title, CardShadow } from '../../components/atoms'
 import { MainLayout } from '../../layouts/MainLayout'
 import { Row, Col } from 'antd'
 import { InputInfo } from '../../components/molecules'
-import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 const FromToPage: NextPage = () => {
+  const dispatch = useDispatch()
+  const router = useRouter()
   const [sendFrom, setSendFrom] = useState<string>('')
   const [sendTo, setSendTo] = useState<string>('')
   const [enableButon, setEnableButton] = useState<boolean>(true)
@@ -17,6 +21,15 @@ const FromToPage: NextPage = () => {
   }
   const handleToValue = (e: React.FormEvent<HTMLInputElement>) => {
     setSendTo(e.currentTarget.value)
+  }
+
+  const dispatcherUsers = () => {
+    dispatch({
+      type: 'ADD_FROMTO',
+      form: { id: 'FROM_TO' },
+      payload: { from: sendFrom, to: sendTo },
+    })
+    router.push('/send/parcels')
   }
 
   useEffect(() => {
@@ -31,7 +44,7 @@ const FromToPage: NextPage = () => {
             <Title text="De quién envía y quién recibe" />
           </Col>
           <Col span={10}>
-            <Image src={fromTo} alt="test" sizes="100%" />
+            <Image src={fromTo} alt="Para quíen" sizes="100%" />
           </Col>
           <Col span={24} />
           <Col xs={24} md={9} xl={8}>
@@ -56,7 +69,9 @@ const FromToPage: NextPage = () => {
           </Col>
           <Col span={24}>
             <Row justify="center">
-              <Button disabled={!enableButon}>Siguiente</Button>
+              <Button disabled={!enableButon} onClick={() => dispatcherUsers()}>
+                Siguiente
+              </Button>
             </Row>
           </Col>
         </Row>
