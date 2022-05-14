@@ -1,4 +1,4 @@
-import { PropsPostCreateSnipment, PropsPostCreateLabel } from '../../interface';
+import { PropsPostCreateShipments, PropsPostCreateLabel } from '../../interface';
 import HttpService from '../HttpServices';
 
 let examplePayload = {
@@ -6,7 +6,6 @@ let examplePayload = {
     province: 'Ciudad de México',
     city: 'Azcapotzalco',
     name: 'Jose Fernando',
-    // "zip": "02900",
     country: 'MX',
     address1: 'Av. Principal #234',
     company: 'skydropx',
@@ -14,21 +13,11 @@ let examplePayload = {
     phone: '5555555555',
     email: 'skydropx@email.com',
   },
-  parcels: [
-    // {
-    //   weight: 3,
-    //   distance_unit: 'CM',
-    //   mass_unit: 'KG',
-    //   height: 10,
-    //   width: 10,
-    //   length: 10,
-    // },
-  ],
+  parcels: [],
   address_to: {
     province: 'Jalisco',
     city: 'Guadalajara',
     name: 'Jorge Fernández',
-    // "zip": "44100",
     country: 'MX',
     address1: ' Av. Lázaro Cárdenas #234',
     company: '-',
@@ -43,7 +32,7 @@ let examplePayload = {
 };
 
 class PostDataService {
-  postCreateSnipment({dataObject}:PropsPostCreateSnipment) {
+  postCreateShipment({dataObject}:PropsPostCreateShipments) {
     const payload = {
       ...examplePayload,
       address_from: {
@@ -54,7 +43,7 @@ class PostDataService {
         ...examplePayload.address_to,
         zip: dataObject.address_to.zip,
       },
-      parcels: [dataObject.parcels],
+      parcels: dataObject.parcels,
     };
     return HttpService().post(payload, 'shipments');
   }

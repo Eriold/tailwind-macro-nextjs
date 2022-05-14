@@ -1,4 +1,4 @@
-export interface Parcels {
+export interface ResShipment {
     data:     DataClass;
     included: Included[];
 }
@@ -87,4 +87,27 @@ export enum Type {
     Addresses = "addresses",
     Parcels = "parcels",
     Rates = "rates",
+}
+
+export interface MassageShipment {
+    created_at:          Date;
+    updated_at:          Date;
+    amount_local:        string;
+    currency_local:      string;
+    provider:            string;
+    service_level_name:  string;
+    service_level_code:  string;
+    service_level_terms: null;
+    days:                number;
+    duration_terms:      null;
+    zone:                null;
+    arrives_by:          null;
+    effectiveness:       null;
+    ranking:             string[];
+    out_of_area:         boolean;
+    out_of_area_pricing: string;
+    total_pricing:       string;
+    is_ocurre:           boolean;
+    key:                 string;
+    rating:              string;
 }
