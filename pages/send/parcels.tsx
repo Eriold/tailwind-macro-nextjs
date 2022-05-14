@@ -6,8 +6,13 @@ import { MainLayout } from '../../layouts/MainLayout'
 import { Row, Col } from 'antd'
 import { InputInfo } from '../../components/molecules'
 import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
+import { addParcel } from '../../redux/slices/pacerls'
 
 const ParcelsPage: NextPage = () => {
+  const dispatch = useDispatch()
+  const router = useRouter()
   const [sendWeight, setSendWeight] = useState<string>('')
   const [sendHeight, setSendHeight] = useState<string>('')
   const [sendWidth, setSendWidth] = useState<string>('')
@@ -25,6 +30,21 @@ const ParcelsPage: NextPage = () => {
   }
   const handleLengthValue = (e: React.FormEvent<HTMLInputElement>) => {
     setSendLength(e.currentTarget.value)
+  }
+
+  const dispatcherParcels = () => {
+    const payload = {
+      forms: {
+        weight: sendWeight,
+        height: sendHeight,
+        width: sendWidth,
+        length: sendLength,
+        distance_unit: 'CM',
+        mass_unit: 'KG',
+      },
+    }
+    dispatch(addParcel(payload))
+    router.push('/send/pricing-list')
   }
 
   useEffect(() => {
@@ -89,7 +109,12 @@ const ParcelsPage: NextPage = () => {
           </Col>
           <Col span={24}>
             <Row justify="center">
-              <Button disabled={!enableButon}>Siguiente</Button>
+              <Button
+                disabled={!enableButon}
+                onClick={() => dispatcherParcels()}
+              >
+                Siguiente
+              </Button>
             </Row>
           </Col>
         </Row>

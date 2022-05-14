@@ -15,14 +15,14 @@ let examplePayload = {
     email: 'skydropx@email.com',
   },
   parcels: [
-    {
-      weight: 3,
-      distance_unit: 'CM',
-      mass_unit: 'KG',
-      height: 10,
-      width: 10,
-      length: 10,
-    },
+    // {
+    //   weight: 3,
+    //   distance_unit: 'CM',
+    //   mass_unit: 'KG',
+    //   height: 10,
+    //   width: 10,
+    //   length: 10,
+    // },
   ],
   address_to: {
     province: 'Jalisco',
@@ -54,7 +54,7 @@ class PostDataService {
         ...examplePayload.address_to,
         zip: dataObject.address_to.zip,
       },
-      parcels: dataObject.parcels,
+      parcels: [dataObject.parcels],
     };
     return HttpService().post(payload, 'shipments');
   }

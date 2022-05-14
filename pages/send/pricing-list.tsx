@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import { Button, CardShadow, Title } from '../../components/atoms'
 import { MainLayout } from '../../layouts'
 import { Table } from 'antd'
@@ -8,6 +8,7 @@ import { ColumnsType } from 'antd/lib/table'
 import { DefaultRecordType } from 'rc-table/lib/interface'
 import { StyledTable } from '../../styles/tableStyled.styles'
 import Link from 'next/link'
+import { useStore } from 'react-redux'
 
 const preData = {
   data: {
@@ -417,7 +418,8 @@ const columns: ColumnsType<DefaultRecordType> = [
   },
 ]
 
-const PricingList: NextPage = children => {
+const PricingList: NextPage = () => {
+  console.log('storageRedux', useStore().getState())
   const dataMassage = preData.included
     .filter(item => item.type === 'rates')
     .map(item => ({
