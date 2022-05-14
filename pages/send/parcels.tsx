@@ -8,6 +8,7 @@ import { InputInfo } from '../../components/molecules'
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
+import { addParcel } from '../../redux/slices/pacerls'
 
 const ParcelsPage: NextPage = () => {
   const dispatch = useDispatch()
@@ -31,11 +32,9 @@ const ParcelsPage: NextPage = () => {
     setSendLength(e.currentTarget.value)
   }
 
-  const dispatcherUsers = () => {
-    dispatch({
-      type: 'ADD_PARCEL',
-      form: { id: 'PARCEL' },
-      payload: {
+  const dispatcherParcels = () => {
+    const payload = {
+      forms: {
         weight: sendWeight,
         height: sendHeight,
         width: sendWidth,
@@ -43,7 +42,8 @@ const ParcelsPage: NextPage = () => {
         distance_unit: 'CM',
         mass_unit: 'KG',
       },
-    })
+    }
+    dispatch(addParcel(payload))
     router.push('/send/pricing-list')
   }
 
@@ -109,7 +109,10 @@ const ParcelsPage: NextPage = () => {
           </Col>
           <Col span={24}>
             <Row justify="center">
-              <Button disabled={!enableButon} onClick={() => dispatcherUsers()}>
+              <Button
+                disabled={!enableButon}
+                onClick={() => dispatcherParcels()}
+              >
                 Siguiente
               </Button>
             </Row>

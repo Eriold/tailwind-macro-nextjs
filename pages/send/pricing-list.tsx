@@ -9,7 +9,6 @@ import { DefaultRecordType } from 'rc-table/lib/interface'
 import { StyledTable } from '../../styles/tableStyled.styles'
 import Link from 'next/link'
 import { useStore } from 'react-redux'
-import { PostDataService } from '../../services'
 
 const preData = {
   data: {
@@ -420,6 +419,7 @@ const columns: ColumnsType<DefaultRecordType> = [
 ]
 
 const PricingList: NextPage = () => {
+  console.log('storageRedux', useStore().getState())
   const dataMassage = preData.included
     .filter(item => item.type === 'rates')
     .map(item => ({
@@ -451,12 +451,4 @@ const PricingList: NextPage = () => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const store = useStore();
-  console.log({store})
-  // const createSnipment = PostDataService.postCreateSnipment
-  return {
-    props: {}, // will be passed to the page component as props
-  }
-}
 export default PricingList

@@ -7,10 +7,11 @@ import { Button, Title, CardShadow } from '../../components/atoms'
 import { MainLayout } from '../../layouts/MainLayout'
 import { Row, Col } from 'antd'
 import { InputInfo } from '../../components/molecules'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../../hooks/dispatch'
+import { addUser } from '../../redux/slices/users';
 
 const FromToPage: NextPage = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch();
   const router = useRouter()
   const [sendFrom, setSendFrom] = useState<string>('')
   const [sendTo, setSendTo] = useState<string>('')
@@ -24,11 +25,8 @@ const FromToPage: NextPage = () => {
   }
 
   const dispatcherUsers = () => {
-    dispatch({
-      type: 'ADD_FROMTO',
-      form: { id: 'FROM_TO' },
-      payload: { from: sendFrom, to: sendTo },
-    })
+    const payload = { from: sendFrom, to: sendTo }
+    dispatch(addUser(payload))
     router.push('/send/parcels')
   }
 
