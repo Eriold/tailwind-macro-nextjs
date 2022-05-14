@@ -1,9 +1,9 @@
 export interface ParcelProps {
   forms: {
-    weight: string
-    height: string
-    width: string
-    length: string
+    weight: number
+    height: number
+    width: number
+    length: number
     distance_unit: string
     mass_unit: string
   }

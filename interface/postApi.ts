@@ -1,8 +1,8 @@
-export interface PropsPostCreateSnipment {
+export interface PropsPostCreateShipments {
   dataObject: {
     address_from: ZipProps;
     address_to: ZipProps;
-    parcels: [ParcelsProps];
+    parcels: ParcelsProps[];
   }
 }
 
