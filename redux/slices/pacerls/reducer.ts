@@ -4,10 +4,10 @@ import { addParcel } from './actions'
 
 let initialState: ParcelProps = {
   forms: {
-    weight: '',
-    height: '',
-    width: '',
-    length: '',
+    weight: 0,
+    height: 0,
+    width: 0,
+    length: 0,
     distance_unit: '',
     mass_unit: '',
   },

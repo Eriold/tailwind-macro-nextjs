@@ -13,23 +13,23 @@ import { addParcel } from '../../redux/slices/pacerls'
 const ParcelsPage: NextPage = () => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const [sendWeight, setSendWeight] = useState<string>('')
-  const [sendHeight, setSendHeight] = useState<string>('')
-  const [sendWidth, setSendWidth] = useState<string>('')
-  const [sendLength, setSendLength] = useState<string>('')
+  const [sendWeight, setSendWeight] = useState<number>(0)
+  const [sendHeight, setSendHeight] = useState<number>(0)
+  const [sendWidth, setSendWidth] = useState<number>(0)
+  const [sendLength, setSendLength] = useState<number>(0)
   const [enableButon, setEnableButton] = useState<boolean>(true)
 
   const handleWeightValue = (e: React.FormEvent<HTMLInputElement>) => {
-    setSendWeight(e.currentTarget.value)
+    setSendWeight(parseInt(e.currentTarget.value))
   }
   const handleHeightValue = (e: React.FormEvent<HTMLInputElement>) => {
-    setSendHeight(e.currentTarget.value)
+    setSendHeight(parseInt(e.currentTarget.value))
   }
   const handleWidthValue = (e: React.FormEvent<HTMLInputElement>) => {
-    setSendWidth(e.currentTarget.value)
+    setSendWidth(parseInt(e.currentTarget.value))
   }
   const handleLengthValue = (e: React.FormEvent<HTMLInputElement>) => {
-    setSendLength(e.currentTarget.value)
+    setSendLength(parseInt(e.currentTarget.value))
   }
 
   const dispatcherParcels = () => {
@@ -49,10 +49,7 @@ const ParcelsPage: NextPage = () => {
 
   useEffect(() => {
     setEnableButton(
-      sendWeight.length > 0 &&
-        sendHeight.length > 0 &&
-        sendWidth.length > 0 &&
-        sendLength.length > 0,
+      sendWeight > 0 && sendHeight > 0 && sendWidth > 0 && sendLength > 0,
     )
   }, [sendWeight, sendHeight, sendWidth, sendLength])
 

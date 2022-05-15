@@ -1,381 +1,19 @@
-import type { GetServerSideProps, NextPage } from 'next'
+import { useEffect, useState } from 'react'
+import type { NextPage } from 'next'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Button, CardShadow, Title } from '../../components/atoms'
 import { MainLayout } from '../../layouts'
-import { Table } from 'antd'
+import { Alert, Col, Modal, notification, Row, Table } from 'antd'
 import { dateSpanish } from '../../utils/formatDate'
 import { rankingStarts, ratingStarts } from '../../constants/starts'
 import { ColumnsType } from 'antd/lib/table'
 import { DefaultRecordType } from 'rc-table/lib/interface'
 import { StyledTable } from '../../styles/tableStyled.styles'
-import Link from 'next/link'
-import { useStore } from 'react-redux'
-
-const preData = {
-  data: {
-    id: '15928139',
-    type: 'shipments',
-    attributes: {
-      status: 'WAITING',
-      created_at: '2022-05-11T10:32:03.124-05:00',
-      updated_at: '2022-05-11T10:32:03.171-05:00',
-    },
-    relationships: {
-      parcels: {
-        data: [
-          {
-            id: '72888',
-            type: 'parcels',
-          },
-        ],
-      },
-      rates: {
-        data: [
-          {
-            id: '414675',
-            type: 'rates',
-          },
-          {
-            id: '414674',
-            type: 'rates',
-          },
-          {
-            id: '414673',
-            type: 'rates',
-          },
-          {
-            id: '414672',
-            type: 'rates',
-          },
-          {
-            id: '414671',
-            type: 'rates',
-          },
-          {
-            id: '414670',
-            type: 'rates',
-          },
-          {
-            id: '414669',
-            type: 'rates',
-          },
-          {
-            id: '414668',
-            type: 'rates',
-          },
-          {
-            id: '414667',
-            type: 'rates',
-          },
-        ],
-      },
-      address_to: {
-        data: {
-          id: '142409',
-          type: 'addresses',
-        },
-      },
-      address_from: {
-        data: {
-          id: '142408',
-          type: 'addresses',
-        },
-      },
-      order: {
-        data: null,
-      },
-      labels: {
-        data: [],
-      },
-      consignment_note_product_class: {
-        data: {
-          id: '3115',
-          type: 'consignment_note_product_classes',
-        },
-      },
-      consignment_note_packaging: {
-        data: {
-          id: '1',
-          type: 'consignment_note_packagings',
-        },
-      },
-      chosen_rate: {
-        data: null,
-      },
-    },
-  },
-  included: [
-    {
-      id: '72888',
-      type: 'parcels',
-      attributes: {
-        length: '10.0',
-        height: '10.0',
-        width: '10.0',
-        weight: '3.0',
-        mass_unit: 'KG',
-        distance_unit: 'CM',
-      },
-    },
-    {
-      id: '414675',
-      type: 'rates',
-      attributes: {
-        created_at: '2022-05-11T10:32:09.578-05:00',
-        updated_at: '2022-05-11T10:32:09.618-05:00',
-        amount_local: '134.0',
-        currency_local: 'MXN',
-        provider: 'CARSSA',
-        service_level_name: 'Nacional',
-        service_level_code: 'NACIONAL',
-        service_level_terms: null,
-        days: 10,
-        duration_terms: null,
-        zone: null,
-        arrives_by: null,
-        effectiveness: null,
-        ranking: [],
-        out_of_area: false,
-        out_of_area_pricing: '0.0',
-        total_pricing: '134.0',
-        is_ocurre: false,
-      },
-    },
-    {
-      id: '414674',
-      type: 'rates',
-      attributes: {
-        created_at: '2022-05-11T10:32:09.555-05:00',
-        updated_at: '2022-05-11T10:32:09.625-05:00',
-        amount_local: '362.0',
-        currency_local: 'MXN',
-        provider: 'DHL',
-        service_level_name: 'DHL Express',
-        service_level_code: 'EXPRESS',
-        service_level_terms: null,
-        days: 2,
-        duration_terms: null,
-        zone: null,
-        arrives_by: null,
-        effectiveness: null,
-        ranking: ['fastest'],
-        out_of_area: false,
-        out_of_area_pricing: '0.0',
-        total_pricing: '362.0',
-        is_ocurre: false,
-      },
-    },
-    {
-      id: '414673',
-      type: 'rates',
-      attributes: {
-        created_at: '2022-05-11T10:32:09.550-05:00',
-        updated_at: '2022-05-11T10:32:09.631-05:00',
-        amount_local: '331.0',
-        currency_local: 'MXN',
-        provider: 'DHL',
-        service_level_name: 'DHL Terrestre',
-        service_level_code: 'STANDARD',
-        service_level_terms: null,
-        days: 5,
-        duration_terms: null,
-        zone: null,
-        arrives_by: null,
-        effectiveness: null,
-        ranking: [],
-        out_of_area: false,
-        out_of_area_pricing: '0.0',
-        total_pricing: '331.0',
-        is_ocurre: false,
-      },
-    },
-    {
-      id: '414672',
-      type: 'rates',
-      attributes: {
-        created_at: '2022-05-11T10:32:09.311-05:00',
-        updated_at: '2022-05-11T10:32:09.637-05:00',
-        amount_local: '178.0',
-        currency_local: 'MXN',
-        provider: 'REDPACK',
-        service_level_name: 'Express',
-        service_level_code: 'EXPRESS',
-        service_level_terms: null,
-        days: 2,
-        duration_terms: null,
-        zone: null,
-        arrives_by: null,
-        effectiveness: null,
-        ranking: ['fastest'],
-        out_of_area: false,
-        out_of_area_pricing: '0.0',
-        total_pricing: '178.0',
-        is_ocurre: false,
-      },
-    },
-    {
-      id: '414671',
-      type: 'rates',
-      attributes: {
-        created_at: '2022-05-11T10:32:09.305-05:00',
-        updated_at: '2022-05-11T10:32:09.644-05:00',
-        amount_local: '127.0',
-        currency_local: 'MXN',
-        provider: 'REDPACK',
-        service_level_name: 'Ecoexpress',
-        service_level_code: 'ECOEXPRESS',
-        service_level_terms: null,
-        days: 5,
-        duration_terms: null,
-        zone: null,
-        arrives_by: null,
-        effectiveness: null,
-        ranking: ['best_price'],
-        out_of_area: false,
-        out_of_area_pricing: '0.0',
-        total_pricing: '127.0',
-        is_ocurre: false,
-      },
-    },
-    {
-      id: '414670',
-      type: 'rates',
-      attributes: {
-        created_at: '2022-05-11T10:32:03.457-05:00',
-        updated_at: '2022-05-11T10:32:09.650-05:00',
-        amount_local: '219.0',
-        currency_local: 'MXN',
-        provider: 'ESTAFETA',
-        service_level_name: 'Servicio Express',
-        service_level_code: 'ESTAFETA_NEXT_DAY',
-        service_level_terms: null,
-        days: 2,
-        duration_terms: null,
-        zone: null,
-        arrives_by: null,
-        effectiveness: null,
-        ranking: ['fastest'],
-        out_of_area: false,
-        out_of_area_pricing: '0.0',
-        total_pricing: '219.0',
-        is_ocurre: false,
-      },
-    },
-    {
-      id: '414669',
-      type: 'rates',
-      attributes: {
-        created_at: '2022-05-11T10:32:03.452-05:00',
-        updated_at: '2022-05-11T10:32:09.657-05:00',
-        amount_local: '174.0',
-        currency_local: 'MXN',
-        provider: 'ESTAFETA',
-        service_level_name: 'Terrestre',
-        service_level_code: 'ESTAFETA_STANDARD',
-        service_level_terms: null,
-        days: 5,
-        duration_terms: null,
-        zone: null,
-        arrives_by: null,
-        effectiveness: null,
-        ranking: [],
-        out_of_area: false,
-        out_of_area_pricing: '0.0',
-        total_pricing: '174.0',
-        is_ocurre: false,
-      },
-    },
-    {
-      id: '414668',
-      type: 'rates',
-      attributes: {
-        created_at: '2022-05-11T10:32:03.302-05:00',
-        updated_at: '2022-05-11T10:32:09.664-05:00',
-        amount_local: '271.0',
-        currency_local: 'MXN',
-        provider: 'FEDEX',
-        service_level_name: 'Standard Overnight',
-        service_level_code: 'STANDARD_OVERNIGHT',
-        service_level_terms: null,
-        days: 2,
-        duration_terms: null,
-        zone: null,
-        arrives_by: null,
-        effectiveness: null,
-        ranking: ['fastest'],
-        out_of_area: false,
-        out_of_area_pricing: '0.0',
-        total_pricing: '271.0',
-        is_ocurre: false,
-      },
-    },
-    {
-      id: '414667',
-      type: 'rates',
-      attributes: {
-        created_at: '2022-05-11T10:32:03.295-05:00',
-        updated_at: '2022-05-11T10:32:09.672-05:00',
-        amount_local: '185.0',
-        currency_local: 'MXN',
-        provider: 'FEDEX',
-        service_level_name: 'Fedex Express Saver',
-        service_level_code: 'FEDEX_EXPRESS_SAVER',
-        service_level_terms: null,
-        days: 5,
-        duration_terms: null,
-        zone: null,
-        arrives_by: null,
-        effectiveness: null,
-        ranking: [],
-        out_of_area: false,
-        out_of_area_pricing: '0.0',
-        total_pricing: '185.0',
-        is_ocurre: false,
-      },
-    },
-    {
-      id: '142409',
-      type: 'addresses',
-      attributes: {
-        name: 'Jorge Fernández',
-        company: '-',
-        address1: 'Av. Lázaro Cárdenas #234',
-        address2: 'Americana',
-        city: 'Guadalajara',
-        province: 'Jalisco',
-        zip: '44100',
-        country: 'MX',
-        phone: '5555555555',
-        email: 'ejemplo@skydropx.com',
-        created_at: '2022-05-11T10:32:03.121-05:00',
-        updated_at: '2022-05-11T10:32:03.121-05:00',
-        reference: 'Frente a tienda de abarro',
-        province_code: 'JA',
-        contents: '0',
-      },
-    },
-    {
-      id: '142408',
-      type: 'addresses',
-      attributes: {
-        name: 'Jose Fernando',
-        company: 'skydropx',
-        address1: 'Av. Principal #234',
-        address2: 'Centro',
-        city: 'Azcapotzalco',
-        province: 'Ciudad de México',
-        zip: '02900',
-        country: 'MX',
-        phone: '5555555555',
-        email: 'skydropx@email.com',
-        created_at: '2022-05-11T10:32:03.117-05:00',
-        updated_at: '2022-05-11T10:32:03.117-05:00',
-        reference: null,
-        province_code: 'DF',
-        contents: null,
-      },
-    },
-  ],
-}
+import { PostDataService } from '../../services'
+import { useAppSelector } from '../../hooks/dispatch'
+import { PropsPostCreateShipments } from '../../interface'
+import { ResShipment, MassageShipment, Included } from '../../interface'
 
 const columns: ColumnsType<DefaultRecordType> = [
   {
@@ -419,34 +57,167 @@ const columns: ColumnsType<DefaultRecordType> = [
 ]
 
 const PricingList: NextPage = () => {
-  console.log('storageRedux', useStore().getState())
-  const dataMassage = preData.included
-    .filter(item => item.type === 'rates')
-    .map(item => ({
-      ...item.attributes,
-      key: item.id,
-      rating: ratingStarts(item.attributes.ranking),
-    }))
+  const router = useRouter()
+
+  const [retry, setRetry] = useState(false)
+  const [dataTable, setDataTable] = useState<MassageShipment[]>([])
+  const [spinerDataTable, setSpinerDataTable] = useState<boolean>(true)
+  const [errorIncludedNull, seterrorIncludedNull] = useState<boolean>(false)
+  const [showModalErr, setShowModalErr] = useState({
+    show: false,
+    message: null,
+  })
+  const [showModalSuccess, setShowModalSuccess] = useState({
+    show: false,
+    url: '',
+  })
+
+  const { from, to } = useAppSelector(state => state.user)
+  const { forms } = useAppSelector(state => state.parcel.forms)
+
+  const postCreateLabel = (rate_id: number) => {
+    PostDataService.postCreateLabel(rate_id)
+      .then(res => {
+        if (res.data.attributes.status === 'ERROR') {
+          setShowModalErr({
+            show: true,
+            message: res.data.attributes.error_message[0].message,
+          })
+        } else {
+          setShowModalSuccess({
+            show: true,
+            url: res.data.attributes.tracking_url_provider,
+          })
+        }
+      })
+      .catch(err => {
+        setShowModalErr({ message: err, show: true })
+      })
+  }
+
+  const postCreateShipment = () => {
+    setSpinerDataTable(true)
+    seterrorIncludedNull(false)
+    const payload: PropsPostCreateShipments = {
+      dataObject: {
+        address_from: {
+          zip: from,
+        },
+        address_to: {
+          zip: to,
+        },
+        parcels: [forms],
+      },
+    }
+    PostDataService.postCreateShipment(payload)
+      .then((res: ResShipment) => {
+        // @ts-ignore
+        const dataMassage: MassageShipment[] = res.included
+          .filter((includ: Included) => includ.type === 'rates')
+          .map((includ: Included) => ({
+            ...includ.attributes,
+            key: includ.id,
+            rating: ratingStarts(includ.attributes.ranking),
+          }))
+        if (dataMassage.length === 0) {
+          seterrorIncludedNull(true)
+        } else {
+          setDataTable(dataMassage)
+        }
+        setSpinerDataTable(false)
+      })
+      .catch(err => {
+        notification.error({
+          message: 'Ha ocurrido un error',
+          description: 'Este error puede asociarse al servidor' + err,
+          placement: 'top',
+        })
+        setTimeout(() => {
+          router.push('/')
+        }, 4000)
+      })
+  }
+  const modalStateErr = () => {
+    setShowModalErr({ ...showModalErr, show: false })
+    setRetry(!retry)
+  }
+  const modalStateSuccess = () => {
+    setShowModalSuccess({ ...showModalSuccess, show: false })
+    router.push('/')
+  }
+  useEffect(() => {
+    postCreateShipment()
+  }, [retry])
   return (
     <MainLayout>
       <CardShadow>
         <Title text="Selecciona la opción de preferencia" />
+        {errorIncludedNull && (
+          <Alert
+            message="Aviso"
+            description="No se encontraron servicios para tu paquete, intenta otra dirección o proporciones del paquete."
+            type="warning"
+            showIcon
+          />
+        )}
         <StyledTable>
           <Table
             columns={columns}
-            dataSource={dataMassage}
+            dataSource={dataTable}
             key="key"
             onRow={record => ({
               onClick: () => {
-                console.log(record.key)
+                postCreateLabel(parseInt(record.key))
               },
             })}
+            loading={spinerDataTable}
           />
         </StyledTable>
         <Link href="/">
           <Button>Regresar al inicio</Button>
         </Link>
       </CardShadow>
+      <Modal
+        visible={showModalErr.show}
+        okText="Reintentar"
+        onOk={modalStateErr}
+        cancelButtonProps={{ style: { display: 'none' } }}
+        closable={false}
+      >
+        <Alert
+          message="Se encontró un error al generar la guía"
+          description={
+            showModalErr.message ||
+            'No se encontraron servicios para tu paquete, intenta con otro servicio diferente.'
+          }
+          type="error"
+          showIcon
+        />
+      </Modal>
+      <Modal
+        // visible={showModalSuccess.show}
+        visible={true}
+        okText="Finalizar"
+        onOk={modalStateSuccess}
+        cancelButtonProps={{ style: { display: 'none' } }}
+        closable={false}
+      >
+        <Alert
+          message="La guía fue generada correctamente"
+          description="Puedes descargar la guía generada automáticamente"
+          type="success"
+          showIcon
+        />
+        <Row align="middle" justify="center" style={{ paddingTop: '12px' }}>
+          <Col>
+            <Link href={showModalSuccess.url}>
+              <a target="_blank">
+                <Button>Descargar guía</Button>
+              </a>
+            </Link>
+          </Col>
+        </Row>
+      </Modal>
     </MainLayout>
   )
 }
