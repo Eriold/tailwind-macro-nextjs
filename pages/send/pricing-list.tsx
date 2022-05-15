@@ -195,8 +195,7 @@ const PricingList: NextPage = () => {
         />
       </Modal>
       <Modal
-        // visible={showModalSuccess.show}
-        visible={true}
+        visible={showModalSuccess.show}
         okText="Finalizar"
         onOk={modalStateSuccess}
         cancelButtonProps={{ style: { display: 'none' } }}
