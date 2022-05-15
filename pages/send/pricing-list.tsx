@@ -195,7 +195,8 @@ const PricingList: NextPage = () => {
         />
       </Modal>
       <Modal
-        visible={showModalSuccess.show}
+        // visible={showModalSuccess.show}
+        visible={true}
         okText="Finalizar"
         onOk={modalStateSuccess}
         cancelButtonProps={{ style: { display: 'none' } }}
@@ -209,9 +210,11 @@ const PricingList: NextPage = () => {
         />
         <Row align="middle" justify="center" style={{ paddingTop: '12px' }}>
           <Col>
-            <a href={showModalSuccess.url} target="_blank">
-              <Button>Descargar guía</Button>
-            </a>
+            <Link href={showModalSuccess.url}>
+              <a target="_blank">
+                <Button>Descargar guía</Button>
+              </a>
+            </Link>
           </Col>
         </Row>
       </Modal>
