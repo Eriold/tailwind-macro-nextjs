@@ -1,22 +1,25 @@
 export interface PropsPostCreateShipments {
   dataObject: {
-    address_from: ZipProps;
-    address_to: ZipProps;
-    parcels: ParcelsProps[];
+    address_from: ZipProps
+    address_to: ZipProps
+    parcels: ParcelsProps[]
   }
 }
 
 interface ZipProps {
-  zip: string;
+  zip: string
 }
 
 interface ParcelsProps {
-  weight: number;
-  distance_unit: string;
-  mass_unit: string;
-  height: number;
-  width: number;
-  length: number;
+  weight: number
+  distance_unit: string
+  mass_unit: string
+  height: number
+  width: number
+  length: number
 }
 
-export interface PropsPostCreateLabel {}
+export interface PropsPostCreateLabel {
+  rate_id: number
+  label_format: string
+}
