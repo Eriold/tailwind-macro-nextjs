@@ -38,6 +38,10 @@ Open [http://localhost:6006](http://localhost:6006) with your browser to see the
 
 This project is running on Vercel. Visit [Production](https://skydropx-psi.vercel.app/)
 
+## Change token of API
+
+Goes to folder `env` and change vars in `enviroment.prod.ts`
+
 ## Technologies use in this test.
 
 * React
