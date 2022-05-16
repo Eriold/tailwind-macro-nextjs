@@ -28,7 +28,8 @@ const reducer = (state: any, action: AnyAction) => {
 
 export const makeStore = () =>
   configureStore({
-    reducer
+    reducer,
+    devTools: false
   });
 
 type Store = ReturnType<typeof makeStore>;
