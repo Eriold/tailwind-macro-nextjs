@@ -37,15 +37,15 @@ const FromToPage: NextPage = () => {
   return (
     <MainLayout>
       <CardShadow>
-        <Row justify="center" gutter={[16, 16]}>
-          <Col span={24}>
+        <Row justify="center" gutter={[16, 16]} role="main">
+          <Col span={24} role="columnheader">
             <Title text="De quién envía y quién recibe" />
           </Col>
-          <Col span={10}>
+          <Col span={10} role="">
             <Image src={fromTo} alt="Para quíen" sizes="100%" />
           </Col>
-          <Col span={24} />
-          <Col xs={24} md={9} xl={8}>
+          <Col span={24} role="columnheader" />
+          <Col xs={24} md={9} xl={8} role="columnheader" >
             <InputInfo
               title="Zip quíen envía"
               inputProps={{
@@ -55,7 +55,7 @@ const FromToPage: NextPage = () => {
               }}
             />
           </Col>
-          <Col xs={24} md={9} xl={8}>
+          <Col xs={24} md={9} xl={8} role="columnheader">
             <InputInfo
               title="Zip quíen recibe"
               inputProps={{
@@ -65,8 +65,8 @@ const FromToPage: NextPage = () => {
               }}
             />
           </Col>
-          <Col span={24}>
-            <Row justify="center">
+          <Col span={24} role="columnheader">
+            <Row justify="center" role="button">
               <Button disabled={!enableButon} onClick={() => dispatcherUsers()}>
                 Siguiente
               </Button>
