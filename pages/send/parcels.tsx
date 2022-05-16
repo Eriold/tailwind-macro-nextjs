@@ -56,15 +56,15 @@ const ParcelsPage: NextPage = () => {
   return (
     <MainLayout>
       <CardShadow>
-        <Row justify="center" gutter={[16, 16]}>
+        <Row justify="center" gutter={[16, 16]} role="main">
           <Col span={24}>
             <Title text="Información detallada del paquete" />
           </Col>
-          <Col span={10}>
+          <Col span={10} role="columnheader">
             <Image src={parcel} alt="test" sizes="100%" />
           </Col>
-          <Col span={24} />
-          <Col xs={24} md={9}>
+          <Col span={24} role="columnheader" />
+          <Col xs={24} md={9} role="columnheader">
             <InputInfo
               title="Peso en kilogramos (KG)"
               inputProps={{
@@ -74,7 +74,7 @@ const ParcelsPage: NextPage = () => {
               }}
             />
           </Col>
-          <Col xs={24} md={9}>
+          <Col xs={24} md={9} role="columnheader">
             <InputInfo
               title="Altura en centímetros (CM)"
               inputProps={{
@@ -84,7 +84,7 @@ const ParcelsPage: NextPage = () => {
               }}
             />
           </Col>
-          <Col xs={24} md={9}>
+          <Col xs={24} md={9} role="columnheader">
             <InputInfo
               title="Ancho en centímetros (CM)"
               inputProps={{
@@ -94,7 +94,7 @@ const ParcelsPage: NextPage = () => {
               }}
             />
           </Col>
-          <Col xs={24} md={9}>
+          <Col xs={24} md={9} role="columnheader">
             <InputInfo
               title="Largo en centímetros (CM)"
               inputProps={{
@@ -104,8 +104,8 @@ const ParcelsPage: NextPage = () => {
               }}
             />
           </Col>
-          <Col span={24}>
-            <Row justify="center">
+          <Col span={24} role="columnheader">
+            <Row justify="center" role="button">
               <Button
                 disabled={!enableButon}
                 onClick={() => dispatcherParcels()}

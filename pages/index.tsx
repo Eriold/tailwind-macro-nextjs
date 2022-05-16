@@ -10,17 +10,17 @@ const Home: NextPage = () => {
   return (
     <MainLayout>
       <CardShadow>
-        <Row justify="center" gutter={[16, 16]}>
-          <Col span={24}>
+        <Row justify="center" gutter={[16, 16]} role="main">
+          <Col span={24} role="columnheader">
             <Title text="Bienvenido" />
           </Col>
-          <Col span={20}>
+          <Col span={20} role="columnheader">
             <Image src={welcome} alt="test" sizes="100%" />
           </Col>
-          <Col span={24}>
-            <Row justify="center">
-              <Link href='/send/from-to'>
-              <Button>Continuar</Button>
+          <Col span={24} role="columnheader">
+            <Row justify="center" role="button">
+              <Link href="/send/from-to">
+                <Button>Continuar</Button>
               </Link>
             </Row>
           </Col>
