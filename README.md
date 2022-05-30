@@ -54,3 +54,4 @@ Goes to folder `env` and change vars in `enviroment.prod.ts`
 * Storybook
 * Hooks
 * Ant Desing
+* SEO

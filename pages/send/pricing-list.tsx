@@ -86,7 +86,7 @@ const PricingList: NextPage = () => {
         } else {
           setShowModalSuccess({
             show: true,
-            url: res.data.attributes.tracking_url_provider,
+            url: res.data.attributes.label_url,
           })
         }
       })
